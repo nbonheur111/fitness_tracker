@@ -157,6 +157,7 @@ app.put('/update_user/:userId',async(req, res) => {
     console.log(response);
     res.send(response)
 })
+
 //update workout
 app.put('/update_workout/:workoutId',async(req, res) => {
     let id = req.params.workoutId;
