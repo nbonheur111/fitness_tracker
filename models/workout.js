@@ -6,6 +6,12 @@ const workoutSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+
+    workout: {
+        type: String,
+        required: true
+
+    },
     description: {
         type: String,
         required: true

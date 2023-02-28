@@ -28,9 +28,28 @@ app.use(logger('dev'));
 //parse stringified objects (JSON)
 app.use(express.json());
 
+// server build folder
+app.use(express.static(path.join(__dirname, 'build')));
+
 
 
 //------------------ROUTES-----------------------
+
+
+//route to get workout
+app.get('/users/history', async(req, res) => {
+    console.log(req.body);
+
+    try {
+        const workout = await Workout.find({});
+        // console.log(workout);
+        res.json(workout)
+    
+    } catch (err) {
+        res.status(400).json(`Error: ${err}`)
+        
+    }
+})
 
 
 //get users
@@ -78,30 +97,18 @@ app.post('/signup',async(req, res) => {
 
 
 
-//route to get workout
-app.get('/get_workouts', async(req, res) => {
-    console.log(req.body);
 
-    try {
-        const workout = await Workout.find();
-        console.log(workout);
-        res.json(workout)
-    
-    } catch (err) {
-        res.status(400).json(`Error: ${err}`)
-        
-    }
-})
 
 //route to create a workout
 
-app.post('/workout', async(req, res) => {
+app.post('/users/create_workout', async(req, res) => {
 
     console.log(req.body)
 
     try {
         let workoutFromCollection = await Workout.create({
             username: req.body.username,
+            workout:req.body.workout,
             description: req.body.description,
             duration: req.body.duration,
             date: req.body.date

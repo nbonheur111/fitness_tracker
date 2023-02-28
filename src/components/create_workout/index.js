@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
-import { signUp } from '../../utilites/user-functions.js';
+import { addWorkout} from '../../utilites/user-functions.js';
 
 export default class CreateWorkout extends Component {
 
@@ -29,8 +29,9 @@ export default class CreateWorkout extends Component {
 
     let data = {...this.state}
     delete data.confirm;
+    data.workout =this.userInputRef.current.value //get selected value using ref
 
-    let response = await signUp(data)
+    let response = await addWorkout(data)
     console.log(response);
   }
 
@@ -71,14 +72,17 @@ export default class CreateWorkout extends Component {
               value={this.state.workout}
               onChange={this.handleChange}
             >
+              <option value="">Select a workout</option>
               <option>Walk </option>
-              <option>run </option>
+              <option>Run </option>
               <option>Cycle </option>
               <option>Hiking </option>
               <option>Swim </option>
               <option>Yoga </option>
             </select>
+            
           </div>
+           
 
           <div style={{maxWidth:300}} className="form-group">
             <label>Duration: </label>
